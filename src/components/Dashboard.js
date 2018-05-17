@@ -3,23 +3,23 @@ import { connect } from 'react-redux';
 
 class Dashboard extends Component {
     render() {
+        const { tweetIds } = this.props;
         return (
-            <div>
-                <h1>Dashboard</h1>
-            </div>
+            <ul className="dashboard-list">
+                {tweetIds.map((id) => (
+                    <li key={id}>TWEET ID: {id}</li>
+                ))}
+            </ul>
         )
     }
 }
 
 function mapStateToProps({ tweets }) {
     console.log('tweets', tweets);
-    // const sortedTweets = tweets.sort((a, b) => {
-    //   console.log('a', a);
-    //   console.log('b', b);
-    // });
+    const tweetIds = Object.keys(tweets).sort((a, b) => tweets[b].timestamp - tweets[a].timestamp);
 
     return {
-        // sortedTweets
+        tweetIds
     }
 }
 
